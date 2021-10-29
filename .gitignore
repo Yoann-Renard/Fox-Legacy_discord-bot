@@ -1,0 +1,5 @@
+node_modules
+.env
+config.json
+run_Fox_Legacy_windows.bat
+run_Fox_Legacy_linux.sh
