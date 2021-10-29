@@ -1,1 +1,1 @@
-# Fox-Legacy_discord-bot
+# Fox Legacy
