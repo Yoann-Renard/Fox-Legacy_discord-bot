@@ -1,4 +1,4 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Intents} = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const { token } = require('./config.json');
 client.on('ready', () => {
@@ -124,45 +124,45 @@ client.on('messageCreate', async msg => {
 		switch (true) {
 			case RegExp('\\bsad\\b').test(msg_search):
 				random_gif =  Math.floor(Math.random() * sad_gifs.length);
-				let sad_gif = new Discord.MessageAttachment(sad_gifs[random_gif]);
-				msg.channel.send(sad_gif);
-				msg.react('😢');
+				let sad_gif = sad_gifs[random_gif]
+				await msg.channel.send(sad_gif);
+				await msg.react('😢');
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 
 			case RegExp('\\bhappy\\b').test(msg_search):
 				random_gif =  Math.floor(Math.random() * happy_gifs.length);
-				let happy_gif = new Discord.MessageAttachment(happy_gifs[random_gif]);
-				msg.channel.send(happy_gif);
-				msg.react('😄');
+				let happy_gif = happy_gifs[random_gif]
+				await msg.channel.send(happy_gif);
+				await msg.react('😄');
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 			case RegExp('\\bnut nut\\b').test(msg_search):
 				random_gif =  Math.floor(Math.random() * pingu_gifs.length);
-				let pingu_gif = new Discord.MessageAttachment(pingu_gifs[random_gif]);
-				msg.channel.send(pingu_gif);
-				msg.react('🐧');
+				let pingu_gif = pingu_gifs[random_gif]
+				await msg.channel.send(pingu_gif);
+				await msg.react('🐧');
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 			case RegExp('\\bhorny jail\\b').test(msg_search):
-				msg.channel.send('https://tenor.com/bkKml.gif');
+				await msg.channel.send('https://tenor.com/bkKml.gif');
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 			case RegExp('\\bhorny\\b').test(msg_search):
 				random_gif =  Math.floor(Math.random() * horny_gifs.length);
-				let horny_gif = new Discord.MessageAttachment(horny_gifs[random_gif]);
-				msg.channel.send(horny_gif);
-				msg.react('🔞');
+				let horny_gif = horny_gifs[random_gif]
+				await msg.channel.send(horny_gif);
+				await msg.react('🔞');
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 			case RegExp('\\bfesses\\b').test(msg_search) || RegExp('\\bfesse\\b').test(msg_search):
 				random_gif =  Math.floor(Math.random() * fesses_gifs.length);
-				msg.channel.send(fesses_gifs[random_gif]);
+				await msg.channel.send(fesses_gifs[random_gif]);
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 
 			case RegExp('\\bjavel\\b').test(msg_search):
-				msg.channel.send("https://tenor.com/view/real-drinks-drink-clorox-cat-gif-11629362");
+				await msg.channel.send("https://tenor.com/view/real-drinks-drink-clorox-cat-gif-11629362");
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 			default:break;
