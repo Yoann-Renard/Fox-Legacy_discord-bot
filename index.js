@@ -1,5 +1,5 @@
 const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const { token } = require('./config.json');
 client.on('ready', () => {
 	console.log(`'${client.user.tag}' est en ligne.`);
@@ -81,16 +81,14 @@ var insultes = [
 "tu vois, là, ce que tu es en train de faire ? C’est exactement pour cela que tu n’as pas d’amis."
 ];
 // Biblio
-
-client.on('message', msg => {
+client.on('messageCreate', async msg => {
 	// Variables
 	//var collect_msg_5min = new Discord.MessageCollector(msg.channel,msg.createdAt>Date.now()-300000);
 	let msg_search = msg.content.toLowerCase();
 	let bot_prefix = '!f'+' ';
 	var random_gif;
 	// Variables
-	
-	
+
 	if (msg.content.slice(0,bot_prefix.length) === bot_prefix) {
 		let msg_cmd =msg.content.slice(bot_prefix.length).trim().toLowerCase();
 		switch (true) {
@@ -104,7 +102,7 @@ client.on('message', msg => {
 				msg_spam = msg.content.slice(bot_prefix.length).trim().slice(4);
 				if (msg_spam.length > 0){
 					for ( let i=0 ; i<10 ; i++){
-						msg.channel.send(msg_spam);
+						await msg.channel.send(msg_spam);
 					}
 				}else {
 					msg.channel.send(`Précise le message à spam ${msg.author.toString()}.`);
@@ -120,7 +118,7 @@ client.on('message', msg => {
 				break;
 		}
 	}
-	
+
 	// Reactions Dynamiques
 	if (msg.author!=client.user){
 		switch (true) {
@@ -131,7 +129,7 @@ client.on('message', msg => {
 				msg.react('😢');
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
-				
+
 			case RegExp('\\bhappy\\b').test(msg_search):
 				random_gif =  Math.floor(Math.random() * happy_gifs.length);
 				let happy_gif = new Discord.MessageAttachment(happy_gifs[random_gif]);
@@ -162,17 +160,16 @@ client.on('message', msg => {
 				msg.channel.send(fesses_gifs[random_gif]);
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
-				
+
 			case RegExp('\\bjavel\\b').test(msg_search):
 				msg.channel.send("https://tenor.com/view/real-drinks-drink-clorox-cat-gif-11629362");
 				Console_Log_Message_Send(msg.author.tag, msg.guild, msg.channel.name);
 				break;
 			default:break;
-		  
-		  
+
 		}
 	}
-	
+
 	// appel du bot
 	if (msg.author!=client.user && (/**/msg.mentions.has(client.user) || msg_search.includes('fox legacy')/**/)){
 		switch (true){
